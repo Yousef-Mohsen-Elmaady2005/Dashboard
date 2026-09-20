@@ -61,7 +61,7 @@ const AddUser = () => {
   return (
     <section className="max-w-lg">
       <h1 className="text-xl font-medium text-gray-800 mb-5">Add user</h1>
-      <form noValidate onSubmit={submit} className="bg-white rounded-xl p-5 space-y-4">
+      <form noValidate onSubmit={submit} className="space-y-4 rounded-xl bg-white p-4 shadow-sm ring-1 ring-gray-100 sm:p-5">
         {errors.length > 0 && (
           <div role="alert" className="space-y-1 rounded-md border border-red-200 bg-red-100 p-4 text-sm text-red-800">
             {errors.map((err, i) => (
@@ -80,7 +80,7 @@ const AddUser = () => {
             />
           </label>
         ))}
-        <button className="rounded-lg bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700">Save user</button>
+        <button className="w-full rounded-lg bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700 sm:w-auto">Save user</button>
       </form>
     </section>
   );

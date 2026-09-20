@@ -76,9 +76,9 @@ const ManagersList = () => {
 
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between gap-4">
+      <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-xl font-semibold">All Managers</h1>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           {selectedIds.length > 0 && (
             <button
               type="button"
@@ -151,13 +151,13 @@ const ManagersList = () => {
 
       {deleteTarget && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" role="dialog" aria-modal="true" aria-labelledby="delete-dialog-title">
-          <div className="w-full max-w-xl rounded-xl bg-white px-6 py-8 text-center shadow-2xl">
+          <div className="w-full max-w-xl rounded-xl bg-white px-4 py-6 text-center shadow-2xl sm:px-6 sm:py-8">
             <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-full border-4 border-orange-300 text-5xl text-orange-300">
               <FontAwesomeIcon icon={faExclamation} />
             </div>
-            <h2 id="delete-dialog-title" className="mb-2 text-2xl font-medium text-gray-700">{deleteTitle}</h2>
+            <h2 id="delete-dialog-title" className="mb-2 text-xl font-medium text-gray-700 sm:text-2xl">{deleteTitle}</h2>
             <p className="mb-8 text-base text-gray-400">This manager cannot be recovered after deletion.</p>
-            <div className="flex justify-center gap-3">
+            <div className="flex flex-col justify-center gap-3 sm:flex-row">
               <button type="button" onClick={deleteManagers} className="rounded-lg bg-red-500 px-8 py-3 text-sm font-semibold text-white transition hover:bg-red-600">Yes, delete</button>
               <button type="button" onClick={() => setDeleteTarget(null)} className="rounded-lg border-2 border-gray-200 bg-gray-50 px-8 py-3 text-sm font-semibold text-gray-600 transition hover:bg-gray-100">Cancel</button>
             </div>
@@ -190,7 +190,7 @@ const DetailRow = ({ icon, label, value, direction }) => (
 
 const ManagerDetails = ({ details, loading, onClose }) => (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" role="dialog" aria-modal="true" aria-labelledby="manager-details-title">
-    <div className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+    <div className="relative w-full max-w-md rounded-2xl bg-white p-4 shadow-2xl sm:p-6">
       <button type="button" onClick={onClose} className="absolute right-4 top-3 text-2xl leading-none text-gray-400 transition hover:text-gray-700" aria-label="Close">×</button>
       <div className="mb-6 flex flex-col items-center text-center">
         <Avatar manager={details} size="h-20 w-20" />

@@ -25,7 +25,7 @@ const PageBreadcrumb = () => {
   const { label, parent, parentPath } = pageDetails(pathname);
 
   return (
-    <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-3 text-lg" dir="ltr">
+    <nav aria-label="Breadcrumb" className="mb-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-base sm:mb-6 sm:gap-3 sm:text-lg" dir="ltr">
       <Link to="/" className="font-semibold text-gray-900 transition hover:text-indigo-600">
         Dashboard
       </Link>

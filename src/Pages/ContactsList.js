@@ -63,7 +63,7 @@ const ContactsList = () => {
 
   return (
     <section>
-      <div className="mb-5 flex items-center justify-between gap-4">
+      <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-xl font-medium text-gray-800">Contact us</h1>
           <p className="mt-1 text-sm text-gray-500">View incoming contact messages.</p>
@@ -79,7 +79,7 @@ const ContactsList = () => {
         {loading && <p className="p-3 text-sm text-gray-500">جارٍ تحميل البيانات…</p>}
         {error && <p className="p-3 text-sm text-red-600">{error}</p>}
         {!loading && !error && (
-          <table className="min-w-full text-sm">
+          <table className="min-w-[620px] w-full text-sm">
             <thead className="border-b border-gray-100 text-gray-500">
               <tr className="text-left">
                 <th className="w-16 p-3 text-center">
@@ -129,17 +129,17 @@ const ContactsList = () => {
       </div>
       {deleteTarget && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" role="dialog" aria-modal="true" aria-labelledby="delete-contact-title">
-          <div className="w-full max-w-xl rounded-xl bg-white px-6 py-8 text-center shadow-2xl">
+          <div className="w-full max-w-xl rounded-xl bg-white px-4 py-6 text-center shadow-2xl sm:px-6 sm:py-8">
             <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-full border-4 border-orange-300 text-5xl text-orange-300">
               <FontAwesomeIcon icon={faExclamation} />
             </div>
-            <h2 id="delete-contact-title" className="mb-2 text-2xl font-medium text-gray-700">
+            <h2 id="delete-contact-title" className="mb-2 text-xl font-medium text-gray-700 sm:text-2xl">
               {deleteTarget.type === 'bulk'
                 ? `Are you sure you want to delete ${selectedIds.length} contact messages?`
                 : `Are you sure you want to delete the message from ${deleteTarget.name}?`}
             </h2>
             <p className="mb-8 text-base text-gray-400">This contact message cannot be recovered after deletion.</p>
-            <div className="flex justify-center gap-3">
+            <div className="flex flex-col justify-center gap-3 sm:flex-row">
               <button type="button" onClick={deleteContacts} className="rounded-lg bg-red-500 px-8 py-3 text-sm font-semibold text-white transition hover:bg-red-600">Yes, delete</button>
               <button type="button" onClick={() => setDeleteTarget(null)} className="rounded-lg border-2 border-gray-200 bg-gray-50 px-8 py-3 text-sm font-semibold text-gray-600 transition hover:bg-gray-100">Cancel</button>
             </div>

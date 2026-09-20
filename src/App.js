@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Sidebar from './Component/Navbar';
 import Dashboard from './Pages/Dashboard';
@@ -16,12 +17,14 @@ import PageBreadcrumb from './Component/PageBreadcrumb';
 import TopBar from './Component/TopBar';
 
 function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
-    <BrowserRouter>
-      <TopBar />
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <TopBar onMenuToggle={() => setSidebarOpen((open) => !open)} />
       <div className="min-h-screen bg-gray-50 pt-[70px]">
-        <Sidebar />
-        <main className="ml-56 p-6">
+        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        <main className="min-w-0 p-4 sm:p-6 lg:ml-56">
           <PageBreadcrumb />
           <Routes>
             <Route path="/" element={<Dashboard />} />

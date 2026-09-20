@@ -54,12 +54,12 @@ const ModelsList = () => {
 
   return (
     <section>
-      <div className="mb-5 flex items-center justify-between gap-4">
+      <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-xl font-semibold text-gray-800">Display Models</h1>
           <p className="mt-1 text-sm text-gray-500">Showing models from the API.</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           {selectedIds.length > 0 && <button type="button" onClick={() => setDeleteTarget({ type: 'bulk' })} className="flex items-center gap-2 rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-600"><FontAwesomeIcon icon={faTrash} size="sm" />Delete Selected ({selectedIds.length})</button>}
           <button type="button" onClick={() => navigate('/models/add')} className="flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-indigo-700">
             <FontAwesomeIcon icon={faPlus} size="sm" />
@@ -71,7 +71,7 @@ const ModelsList = () => {
       {error && <p className="mb-3 text-sm text-red-600">{error}</p>}
       <div className="overflow-x-auto rounded-xl bg-white shadow">
         {loading ? <p className="p-4 text-sm text-gray-500">Loading models...</p> : (
-          <table className="min-w-full text-sm">
+          <table className="min-w-[620px] w-full text-sm">
             <thead><tr className="border-b text-left text-gray-500">
               <th className="p-3"><input type="checkbox" checked={models.length > 0 && selectedIds.length === models.length} onChange={toggleAll} aria-label="Select all models" /></th><th className="p-3 font-medium">#</th><th className="p-3 font-medium">PHOTO</th><th className="p-3 font-medium">MODEL NAME</th><th className="p-3 font-medium">ALBUM</th><th className="p-3 text-right font-medium">ACTIONS</th>
             </tr></thead>
@@ -94,11 +94,11 @@ const ModelsList = () => {
       </div>
 
       {deleteTarget && <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" role="dialog" aria-modal="true" aria-labelledby="delete-model-title">
-        <div className="w-full max-w-xl rounded-xl bg-white px-6 py-8 text-center shadow-2xl">
+        <div className="w-full max-w-xl rounded-xl bg-white px-4 py-6 text-center shadow-2xl sm:px-6 sm:py-8">
           <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-full border-4 border-orange-300 text-5xl text-orange-300"><FontAwesomeIcon icon={faExclamation} /></div>
-          <h2 id="delete-model-title" className="mb-2 text-2xl font-medium text-gray-700">{deleteTitle}</h2>
+          <h2 id="delete-model-title" className="mb-2 text-xl font-medium text-gray-700 sm:text-2xl">{deleteTitle}</h2>
           <p className="mb-8 text-base text-gray-400">This model cannot be recovered after deletion.</p>
-          <div className="flex justify-center gap-3"><button type="button" onClick={deleteModels} className="rounded-lg bg-red-500 px-8 py-3 text-sm font-semibold text-white transition hover:bg-red-600">Yes, delete</button><button type="button" onClick={() => setDeleteTarget(null)} className="rounded-lg border-2 border-gray-200 bg-gray-50 px-8 py-3 text-sm font-semibold text-gray-600 transition hover:bg-gray-100">Cancel</button></div>
+          <div className="flex flex-col justify-center gap-3 sm:flex-row"><button type="button" onClick={deleteModels} className="rounded-lg bg-red-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-red-600 sm:px-8">Yes, delete</button><button type="button" onClick={() => setDeleteTarget(null)} className="rounded-lg border-2 border-gray-200 bg-gray-50 px-6 py-3 text-sm font-semibold text-gray-600 transition hover:bg-gray-100 sm:px-8">Cancel</button></div>
         </div>
       </div>}
     </section>

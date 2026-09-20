@@ -44,7 +44,7 @@ const linkClass = ({ isActive }) =>
       : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
   }`;
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
   const isUsersActive = location.pathname.startsWith('/users');
   const isManagersActive = location.pathname.startsWith('/managers');
@@ -55,8 +55,19 @@ const Sidebar = () => {
   const [modelsOpen, setModelsOpen] = useState(isModelsActive);
   const [contactsOpen, setContactsOpen] = useState(isContactsActive);
 
+  const closeOnMobile = () => {
+    if (window.innerWidth < 1024) onClose();
+  };
+
   return (
-    <aside className="fixed bottom-0 left-0 top-[70px] z-40 flex w-56 flex-col gap-1 overflow-y-auto bg-[#0d0d0f] p-4">
+    <>
+      <button
+        type="button"
+        aria-label="Close navigation menu"
+        onClick={onClose}
+        className={`fixed inset-0 z-30 bg-black/40 transition-opacity lg:hidden ${isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
+      />
+      <aside className={`fixed bottom-0 left-0 top-[70px] z-40 flex w-64 -translate-x-full flex-col gap-1 overflow-y-auto bg-[#0d0d0f] p-4 shadow-xl transition-transform duration-200 lg:w-56 lg:translate-x-0 lg:shadow-none ${isOpen ? 'translate-x-0' : ''}`}>
       <div className="flex items-center gap-3 px-2 pb-6">
         <div className="w-9 h-9 rounded-xl bg-indigo-500 flex items-center justify-center text-white">
           <FontAwesomeIcon icon={faTableCellsLarge} size="sm" />
@@ -65,7 +76,7 @@ const Sidebar = () => {
       </div>
 
       {navItems.map((item) => (
-        <NavLink key={item.label} to={item.to} end={item.end} className={linkClass}>
+        <NavLink key={item.label} to={item.to} end={item.end} className={linkClass} onClick={closeOnMobile}>
           <FontAwesomeIcon icon={item.icon} size="sm" />
           {item.label}
         </NavLink>
@@ -90,7 +101,7 @@ const Sidebar = () => {
       {usersOpen && (
         <div className="flex flex-col gap-1 pl-4">
           {userItems.map((item) => (
-            <NavLink key={item.label} to={item.to} className={linkClass}>
+            <NavLink key={item.label} to={item.to} className={linkClass} onClick={closeOnMobile}>
               <FontAwesomeIcon icon={item.icon} size="xs" />
               {item.label}
             </NavLink>
@@ -118,7 +129,7 @@ const Sidebar = () => {
       {managersOpen && (
         <div className="flex flex-col gap-1 pl-4">
           {managerItems.map((item) => (
-            <NavLink key={item.label} to={item.to} className={linkClass}>
+            <NavLink key={item.label} to={item.to} className={linkClass} onClick={closeOnMobile}>
               <FontAwesomeIcon icon={item.icon} size="xs" />
               {item.label}
             </NavLink>
@@ -145,7 +156,7 @@ const Sidebar = () => {
       {modelsOpen && (
         <div className="flex flex-col gap-1 pl-4">
           {modelItems.map((item) => (
-            <NavLink key={item.label} to={item.to} className={linkClass}>
+            <NavLink key={item.label} to={item.to} className={linkClass} onClick={closeOnMobile}>
               <FontAwesomeIcon icon={item.icon} size="xs" />
               {item.label}
             </NavLink>
@@ -172,14 +183,15 @@ const Sidebar = () => {
       {contactsOpen && (
         <div className="flex flex-col gap-1 pl-4">
           {contactItems.map((item) => (
-            <NavLink key={item.label} to={item.to} className={linkClass}>
+            <NavLink key={item.label} to={item.to} className={linkClass} onClick={closeOnMobile}>
               <FontAwesomeIcon icon={item.icon} size="xs" />
               {item.label}
             </NavLink>
           ))}
         </div>
       )}
-    </aside>
+      </aside>
+    </>
   );
 };
 

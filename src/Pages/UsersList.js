@@ -58,17 +58,17 @@ const UsersList = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-5">
+      <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-xl font-medium text-gray-800 mb-1">Users list</h1>
           <p className="text-sm text-gray-500">GET request from the API.</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           {selectedIds.length > 0 && (
             <button
               type="button"
               onClick={() => setDeleteTarget({ type: 'bulk' })}
-              className="bg-red-500 hover:bg-red-600 text-white text-sm px-4 py-2 rounded-lg transition flex items-center gap-2"
+              className="flex items-center gap-2 rounded-lg bg-red-500 px-3 py-2 text-sm text-white transition hover:bg-red-600 sm:px-4"
             >
               <FontAwesomeIcon icon={faTrash} size="sm" />
               Delete Selected ({selectedIds.length})
@@ -76,7 +76,7 @@ const UsersList = () => {
           )}
           <button
             onClick={() => navigate('/users/add')}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white text-sm px-4 py-2 rounded-lg transition flex items-center gap-2"
+            className="flex items-center gap-2 rounded-lg bg-indigo-600 px-3 py-2 text-sm text-white transition hover:bg-indigo-700 sm:px-4"
           >
             <FontAwesomeIcon icon={faPlus} size="sm" />
             Add user
@@ -84,10 +84,10 @@ const UsersList = () => {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl overflow-hidden">
+      <div className="overflow-x-auto rounded-xl bg-white shadow-sm ring-1 ring-gray-100">
         {error && <p className="p-3 text-sm text-red-600">{error}</p>}
         {loading && <p className="p-3 text-sm text-gray-500">Loading users…</p>}
-        <table className="w-full text-sm">
+        <table className="min-w-[560px] w-full text-sm">
           <thead>
             <tr className="text-left text-gray-500 border-b border-gray-100">
               <th className="p-3">
@@ -154,11 +154,11 @@ const UsersList = () => {
           aria-modal="true"
           aria-labelledby="delete-dialog-title"
         >
-          <div className="w-full max-w-xl rounded-xl bg-white px-6 py-8 text-center shadow-2xl">
+          <div className="w-full max-w-xl rounded-xl bg-white px-4 py-6 text-center shadow-2xl sm:px-6 sm:py-8">
             <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-full border-4 border-orange-300 text-5xl text-orange-300">
               <FontAwesomeIcon icon={faExclamation} />
             </div>
-            <h2 id="delete-dialog-title" className="mb-2 text-2xl font-medium text-gray-700">
+            <h2 id="delete-dialog-title" className="mb-2 text-xl font-medium text-gray-700 sm:text-2xl">
               {deleteTarget.type === 'bulk'
                 ? `Are you sure you want to delete ${selectedIds.length} users?`
                 : `Are you sure you want to delete ${deleteTarget.user.name}?`}
@@ -166,18 +166,18 @@ const UsersList = () => {
             <p className="mb-8 text-base text-gray-400">
               This user cannot be recovered after deletion.
             </p>
-            <div className="flex justify-center gap-3">
+            <div className="flex flex-col justify-center gap-3 sm:flex-row">
               <button
                 type="button"
                 onClick={handleDelete}
-                className="rounded-lg bg-red-500 px-8 py-3 text-sm font-semibold text-white transition hover:bg-red-600"
+                className="rounded-lg bg-red-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-red-600 sm:px-8"
               >
                 Yes, delete
               </button>
               <button
                 type="button"
                 onClick={() => setDeleteTarget(null)}
-                className="rounded-lg border-2 border-gray-200 bg-gray-50 px-8 py-3 text-sm font-semibold text-gray-600 transition hover:bg-gray-100"
+                className="rounded-lg border-2 border-gray-200 bg-gray-50 px-6 py-3 text-sm font-semibold text-gray-600 transition hover:bg-gray-100 sm:px-8"
               >
                 Cancel
               </button>
